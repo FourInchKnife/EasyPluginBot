@@ -2,15 +2,25 @@ import os
 import importlib
 import discord
 from discord.ext import commands
+from time import sleep
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("!"))
 
+print("Checking extensions/ for extensions...")
 for i in os.listdir("extensions"):
     if i.endswith(".py"):
+        print("Searching {} for cogs...".format(i))
         file=importlib.import_module("extensions."+i[:-3])
-        for k in file.cogs:
-            bot.add_cog(k(bot))
-
+        try:
+            for k in file.cogs:
+                bot.add_cog(k(bot))
+                print("| Found ",k)
+        except NameError:
+            print('Improper extension file, missing "cogs" variable. Ignoring and moving on.')
+if bot.cogs == {}:
+    print("No extensions found. Aborting in 5 seconds")
+    sleep(5)
+    exit()
 @bot.event
 async def on_connect():
     print("Logged in as {0}".format(bot.user))
@@ -23,5 +33,4 @@ async def on_command_error(ctx,err):
 bot_token=os.environ.get('bot_token')
 if not bot_token:
     bot_token=input('What is your bot token?')
-    print('\n'*100)
 bot.run(bot_token)
