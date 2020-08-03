@@ -1,1 +1,1 @@
-RunBot: python3 task.py
+RunEasyBot: python3 run.py
