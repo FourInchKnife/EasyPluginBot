@@ -3,7 +3,7 @@ import importlib
 import discord
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("!"),owner_id=600130839870963725,activity=discord.CustomActivity("Being generally useful..."))
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("!"))
 
 for i in os.listdir("extensions"):
     if i.endswith(".py") and not i == "__init__.py":
@@ -20,7 +20,8 @@ async def on_command_error(ctx,err):
     if type(err)!=commands.errors.CommandNotFound:
         await ctx.send(err)
 
-token=input("What is your bot's token?")
-for i in range(100):
-    print("")
-bot.run(token)
+bot_token=environ.get('bot_token')
+if not bot_token:
+    bot_token=input('What is your bot token?')
+    print('\n'*100)
+bot.run(bot_token)
