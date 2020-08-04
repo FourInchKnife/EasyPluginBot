@@ -8,7 +8,7 @@ def makeIndicator(letter): ## Python magic
 class ScheduleMan(commands.Cog):
     def __init__(self,bot,config):
         self.bot=bot
-		self.config=config["ScheduleMan"] ## Config!
+        self.config=config["ScheduleMan"] ## Config!
     @commands.command()
     async def poll(self,ctx,*,arg):
         allButAuthor=[]
@@ -20,7 +20,7 @@ class ScheduleMan(commands.Cog):
         if "@everyone" in arg:
             send="@everyone"
         else:
-            send=None
+        	send=None
         sent_message=await ctx.send(send,embed=toEmbed,allowed_mentions=pingable)
         await sent_message.add_reaction('\U00002705')
         await sent_message.add_reaction('\U0000274C')
