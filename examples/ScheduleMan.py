@@ -24,7 +24,7 @@ class ScheduleMan(commands.Cog):
         await sent_message.add_reaction('\U00002705')
         await sent_message.add_reaction('\U0000274C')
         await ctx.message.delete()
-    @commands.command
+    @commands.command()
     async def days(self,ctx,*,arg):
         with ctx.channel.typing():
             allButAuthor=[]
