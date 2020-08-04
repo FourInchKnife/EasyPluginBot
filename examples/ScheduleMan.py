@@ -5,7 +5,7 @@ def makeIndicator(letter): ## Python magic
 	lets="abcdefghijklmnopqrstuvwxyz"
 	maked=eval('''"\\U000'''+hex(lets.index(letter)+127462)[2:]+'''"''')
 	return maked
-
+bot=commands.Bot();
 class ScheduleMan(commands.Cog):
     def __init__(self,bot):
         self.bot=bot
