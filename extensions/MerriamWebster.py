@@ -20,6 +20,6 @@ You can get your keys by making an account at https://dictionaryapi.com/
 class MerriamWebster(commands.Cog):
     def __init__(self,bot,config):
         self.bot = bot
-        self.config = config["MerriamWebster"]
+        self.config = config
 
 cogs=[]

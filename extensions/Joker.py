@@ -6,7 +6,7 @@ import random
 class Joker(commands.Cog):
     def __init__(self,bot,config):
         self.bot=bot
-        self.config=config["Joker"]
+        self.config=config
         self.jokes=config["jokelist"]
         self.usedjokes=[]
     @commands.command()
