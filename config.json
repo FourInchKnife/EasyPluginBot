@@ -11,6 +11,10 @@
   "ext":{
     "Echo":null,
     "ScheduleMan":null,
+    "MerriamWebster":{
+      "learner":null,
+      "dictionary":null
+    },
     "Joker":{
       "jokelist":[
         "What do you call a mosquito in winter? Dead!",
