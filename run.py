@@ -7,7 +7,7 @@ from time import sleep
 #setup variables
 abort_on_no_extensions=True #stops the bot from running if no extensions are loaded
 bot_command_prefix="!" #sets the prefix for all commands tied to the bot
-directory="examples" #sets the directory for extensions
+directory="extensions" #sets the directory for extensions
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(bot_command_prefix))
 
