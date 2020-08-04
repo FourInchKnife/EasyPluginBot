@@ -8,6 +8,8 @@ from time import sleep
 abort_on_no_extensions=True #stops the bot from running if no extensions are loaded
 bot_command_prefix="!" #sets the prefix for all commands tied to the bot
 
+bot = commands.Bot(command_prefix=commands.when_mentioned_or(bot_command_prefix))
+
 print("Checking extensions/ for extensions...")
 for i in os.listdir("extensions"):
     if i.endswith(".py"):
@@ -25,8 +27,6 @@ if bot.cogs == {}:
         print("Aborting in 5 seconds...")
         sleep(5)
         exit()
-
-bot = commands.Bot(command_prefix=commands.when_mentioned_or(bot_command_prefix))
 
 @bot.event
 async def on_connect():
