@@ -27,8 +27,6 @@ if bot.cogs == {}:
         sleep(5)
         exit()
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or(bot_command_prefix))
-
 @bot.event
 async def on_connect():
     print("Logged in as {0}".format(bot.user))
