@@ -25,7 +25,7 @@ for i in os.listdir(directory):
             file=importlib.import_module(directory+"."+i[:-3])
             try:
                 for k in file.cogs:
-                    bot.add_cog(k(bot,config["ext"][k.__name__])) ## Allow cogs to have config, without opening files multiple times
+                    bot.add_cog(k(bot,config["ext"][i[:-3]][k.__name__])) ## Allow cogs to have config, without opening files multiple times
                     print("| Found ",k)
             except NameError:
                 print('Improper extension file, missing "cogs" variable. Ignoring and skipping file.')

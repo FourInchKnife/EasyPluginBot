@@ -8,7 +8,7 @@ def makeIndicator(letter): ## Python magic
 class ScheduleMan(commands.Cog):
     def __init__(self,bot,config):
         self.bot=bot
-        self.config=config[] ## Config!
+        self.config=config ## Config!
     @commands.command()
     async def poll(self,ctx,*,arg):
         allButAuthor=[]
