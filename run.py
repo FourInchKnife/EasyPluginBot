@@ -7,8 +7,9 @@ from time import sleep
 #setup variables
 abort_on_no_extensions=True #stops the bot from running if no extensions are loaded
 bot_command_prefix="!" #sets the prefix for all commands tied to the bot
-directory="examples"
-bot=commands.Bot(bot_command_prefix);
+directory="examples" #sets the directory for extensions
+
+bot = commands.Bot(command_prefix=when_mentioned_or(bot_command_prefix))
 
 print("Checking "+directory+"/ for extensions...")
 for i in os.listdir(directory):
