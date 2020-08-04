@@ -18,5 +18,8 @@ class Joker(commands.Cog):
             self.jokes=self.usedjokes
             self.usedjokes=[]
         await ctx.send(joke)
+    @commands.command()
+    async def compare(self,ctx,*args):
+        await ctx.send(args[0]+" is better than "+args[1])
 
 cogs=[Joker]
