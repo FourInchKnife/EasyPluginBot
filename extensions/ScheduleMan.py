@@ -11,6 +11,7 @@ class ScheduleMan(commands.Cog):
         self.config=config ## Config!
     @commands.command()
     async def poll(self,ctx,*,arg):
+		"""Starts a yes/no poll"""
         allButAuthor=[]
         for i in ctx.guild.members:
             if i != ctx.author:
@@ -27,6 +28,7 @@ class ScheduleMan(commands.Cog):
         await ctx.message.delete()
     @commands.command()
     async def days(self,ctx,*,arg):
+		"""Polls what days people can do something, whatever that may be"""
         with ctx.channel.typing():
             allButAuthor=[]
             for i in ctx.guild.members:

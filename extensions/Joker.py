@@ -11,6 +11,7 @@ class Joker(commands.Cog):
         self.usedjokes=[]
     @commands.command()
     async def joke(self,ctx,*args):
+        """Tells a funny joke"""
         joke=random.choice(self.jokes)
         self.jokes.remove(joke)
         self.usedjokes.append(joke)
@@ -20,6 +21,7 @@ class Joker(commands.Cog):
         await ctx.send(joke)
     @commands.command()
     async def compare(self,ctx,*args):
+        """Compares any two values"""
         await ctx.send(args[0]+" is better than "+args[1])
 
 cogs=[Joker]
