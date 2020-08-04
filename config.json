@@ -1,0 +1,15 @@
+{
+  "bot":{
+    "no_ext_abort" : true,
+    "command_prefix":"!",
+    "ext_dir":"extensions",
+    "owner_ids":[
+      1
+    ],
+    "bot_token":null
+  },
+  "ext":{
+    "Echo":null,
+    "ScheduleMan":null
+  }
+}
