@@ -10,7 +10,7 @@ class Joker(commands.Cog):
         self.jokes=config["jokelist"]
         self.usedjokes=[]
     @commands.command()
-    async def joke(self,ctx,*args):
+    async def joke(self,ctx):
         """Tells a funny joke"""
         joke=random.choice(self.jokes)
         self.jokes.remove(joke)
@@ -20,8 +20,8 @@ class Joker(commands.Cog):
             self.usedjokes=[]
         await ctx.send(joke)
     @commands.command()
-    async def compare(self,ctx,*args):
+    async def compare(self,ctx,first,second):
         """Compares any two values"""
-        await ctx.send(args[0]+" is better than "+args[1])
+        await ctx.send(first+" is better than "+second)
 
 cogs=[Joker]
