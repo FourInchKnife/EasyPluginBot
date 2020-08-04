@@ -15,13 +15,16 @@ print("Checking "+directory+"/ for extensions...")
 for i in os.listdir(directory):
     if i.endswith(".py"):
         print("Searching {} for cogs...".format(i))
-        file=importlib.import_module(directory+"."+i[:-3])
         try:
-            for k in file.cogs:
-                bot.add_cog(k(bot))
-                print("| Found ",k)
-        except NameError:
-            print('Improper extension file, missing "cogs" variable. Ignoring and moving on.')
+            file=importlib.import_module(directory+"."+i[:-3])
+            try:
+                for k in file.cogs:
+                    bot.add_cog(k(bot))
+                    print("| Found ",k)
+            except NameError:
+                print('Improper extension file, missing "cogs" variable. Ignoring and skipping file.')
+        except Exception as e:
+            print("Exception: {} in {}. Ignoring and skipping file.")
 if bot.cogs == {}:
     print("No extensions found.")
     if abort_on_no_extensions:
