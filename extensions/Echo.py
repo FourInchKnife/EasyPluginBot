@@ -7,7 +7,7 @@ class Echo(commands.Cog):
     #defines bot to make it easier to write
     def __init__(self,bot,config):
          self.bot = bot
-         self.config=config
+         self.config=config["Echo"]
     #adds a command
     @commands.command()
     async def echo(self,ctx,*,message):
