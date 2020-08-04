@@ -23,5 +23,20 @@ class Joker(commands.Cog):
     async def compare(self,ctx,first,second):
         """Compares any two values"""
         await ctx.send(first+" is better than "+second)
+    @commands.command()
+    async def slap(self,ctx,people: commands.Greedy[discord.Member],*,reason="a good reason!"):
+        if len(people)==1:
+            slapstr=people[0].mention
+        elif len(people)==2:
+            slapstr=people[0].mention+" and "+people[1].mention
+        else:
+            slapstr=""
+            for i in people:
+                if i != people[-1]:
+                    slapstr+=i.mention+", "
+                else:
+                    slapstr+="and "+i.mention
+        await ctx.send("Slapped {} for {}".format(slapstr,reason),allowed_mentions=discord.AllowedMentions(everyone=False,users=False,roles=False))
+        await ctx.message.delete()
 
 cogs=[Joker]
