@@ -7,7 +7,7 @@ class Joker(commands.Cog):
     def __init__(self,bot,config):
         self.bot=bot
         self.config=config
-        self.jokes=config["ext"]["Jokes"]["jokelist"]
+        self.jokes=config["ext"]["Joker"]["jokelist"]
         self.usedjokes=[]
     @commands.command()
     async def joke(self,ctx,*args):

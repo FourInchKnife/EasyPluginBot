@@ -11,7 +11,7 @@
   "ext":{
     "Echo":null,
     "ScheduleMan":null,
-    "Jokes":{
+    "Joker":{
       "jokelist":[
         "What do you call a mosquito in winter? Dead!",
         "What do you get if you give a sysadmin a windows machine? Death and anarchy!",
