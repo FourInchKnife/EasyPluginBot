@@ -37,6 +37,9 @@ class Joker(commands.Cog):
                 else:
                     slapstr+="and "+i.mention
         await ctx.send("Slapped {} for {}".format(slapstr,reason),allowed_mentions=discord.AllowedMentions(everyone=False,users=False,roles=False))
-        await ctx.message.delete()
+        try:
+            await ctx.message.delete()
+        except:
+            pass
 
 cogs=[Joker]
