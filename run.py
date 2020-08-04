@@ -7,21 +7,25 @@ from time import sleep
 #setup variables
 abort_on_no_extensions=True #stops the bot from running if no extensions are loaded
 bot_command_prefix="!" #sets the prefix for all commands tied to the bot
-directory="examples" #sets the directory for extensions
+directory="extensions" #sets the directory for extensions
+owner_discord_id={1} #sets the discord id of the owner(s) of the bot. defaults to clyde (an official discord account)
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or(bot_command_prefix))
+bot = commands.Bot(command_prefix=commands.when_mentioned_or(bot_command_prefix),owner_ids=owner_discord_id)
 
 print("Checking "+directory+"/ for extensions...")
 for i in os.listdir(directory):
     if i.endswith(".py"):
         print("Searching {} for cogs...".format(i))
-        file=importlib.import_module(directory+"."+i[:-3])
         try:
-            for k in file.cogs:
-                bot.add_cog(k(bot))
-                print("| Found ",k)
-        except NameError:
-            print('Improper extension file, missing "cogs" variable. Ignoring and moving on.')
+            file=importlib.import_module(directory+"."+i[:-3])
+            try:
+                for k in file.cogs:
+                    bot.add_cog(k(bot))
+                    print("| Found ",k)
+            except NameError:
+                print('Improper extension file, missing "cogs" variable. Ignoring and skipping file.')
+        except Exception as e:
+            print("Exception: {} in {}. Ignoring and skipping file.")
 if bot.cogs == {}:
     print("No extensions found.")
     if abort_on_no_extensions:

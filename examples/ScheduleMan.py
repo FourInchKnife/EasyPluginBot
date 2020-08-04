@@ -38,7 +38,7 @@ class ScheduleMan(commands.Cog):
             else:
                 send=None
             sent_message=await ctx.send(send,embed=toEmbed,allowed_mentions=pingable)
-            for i in "mtwhf":
+            for i in "mtwhfs":
                 await sent_message.add_reaction(makeIndicator(i))
             await sent_message.add_reaction('\U0000274C')
             await ctx.message.delete()
