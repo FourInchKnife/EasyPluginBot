@@ -7,9 +7,10 @@ from time import sleep
 #setup variables
 abort_on_no_extensions=True #stops the bot from running if no extensions are loaded
 bot_command_prefix="!" #sets the prefix for all commands tied to the bot
+directory="examples/"
 
-print("Checking extensions/ for extensions...")
-for i in os.listdir("extensions"):
+print("Checking "+directory+" for extensions...")
+for i in os.listdir(directory):
     if i.endswith(".py"):
         print("Searching {} for cogs...".format(i))
         file=importlib.import_module("extensions."+i[:-3])
