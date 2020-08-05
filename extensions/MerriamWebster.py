@@ -32,18 +32,19 @@ class MerriamWebster(commands.Cog):
         embed=discord.Embed(title="Definition of {}".format(word))
         try:
             for i in data:
-                header = "{} [{}]".format(i["meta"]["app-shortdef"]["hw"],i["meta"]["app-shortdef"]["fl"])
-                body=""
-                for k in i["meta"]["app-shortdef"]["def"]:
-                    q="*".join(k.split("{it}"))
-                    q="*".join(q.split("{/it}"))
-                    q="**".join(q.split("{b}"))
-                    q="**".join(q.split("{b/}"))
-                    q="_ _\n•".join(q.split("{bc}"))
-                    q="\"".join(q.split("{ldquo}"))
-                    q="\"".join(q.split("{rdquo}"))
-                    body+=q+"\n"
-                embed.add_field(name=header,value=body,inline =False)
+                if word in i["meta"]["app-shortdef"]["hw"]:
+                    header = "{} [{}]".format(i["meta"]["app-shortdef"]["hw"],i["meta"]["app-shortdef"]["fl"])
+                    body=""
+                    for k in i["meta"]["app-shortdef"]["def"]:
+                        q="*".join(k.split("{it}"))
+                        q="*".join(q.split("{/it}"))
+                        q="**".join(q.split("{b}"))
+                        q="**".join(q.split("{b/}"))
+                        q="_ _\n•".join(q.split("{bc}"))
+                        q="“".join(q.split("{ldquo}"))
+                        q="”".join(q.split("{rdquo}"))
+                        body+=q+"\n"
+                    embed.add_field(name=header,value=body,inline =False)
             await ctx.send(embed=embed)
         except TypeError as e:
             embed.add_field(name="No definitions found. Maybe try one of these words?",value="•"+"\n•".join(data))
