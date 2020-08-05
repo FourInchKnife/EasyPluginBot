@@ -38,7 +38,7 @@ class MerriamWebster(commands.Cog):
                 q="*".join(q.split("{/it}"))
                 q="**".join(q.split("{b}"))
                 q="**".join(q.split("{b/}"))
-                q="\n•".join(q.split("{bc}"))
+                q="_ _\n•".join(q.split("{bc}"))
                 q="\"".join(q.split("{ldquo}"))
                 q="\"".join(q.split("{rdquo}"))
                 body+=q+"\n"
