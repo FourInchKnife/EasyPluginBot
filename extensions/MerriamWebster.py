@@ -42,7 +42,7 @@ class MerriamWebster(commands.Cog):
                 q="\"".join(q.split("{ldquo}"))
                 q="\"".join(q.split("{rdquo}"))
                 body+=q+"\n"
-            embed.add_field(name=header,value=body)
+            embed.add_field(name=header,value=body,inline =False)
         await ctx.send(embed=embed)
 
 cogs=[MerriamWebster]
