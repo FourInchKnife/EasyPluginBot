@@ -30,19 +30,23 @@ class MerriamWebster(commands.Cog):
     async def define(self,ctx,word):
         data = json.loads(re.get("https://www.dictionaryapi.com/api/v3/references/learners/json/{}?key={}".format(word,self.key))._content)
         embed=discord.Embed(title="Definition of {}".format(word))
-        for i in data:
-            header = "{} [{}]".format(i["meta"]["app-shortdef"]["hw"],i["meta"]["app-shortdef"]["fl"])
-            body=""
-            for k in i["meta"]["app-shortdef"]["def"]:
-                q="*".join(k.split("{it}"))
-                q="*".join(q.split("{/it}"))
-                q="**".join(q.split("{b}"))
-                q="**".join(q.split("{b/}"))
-                q="_ _\n•".join(q.split("{bc}"))
-                q="\"".join(q.split("{ldquo}"))
-                q="\"".join(q.split("{rdquo}"))
-                body+=q+"\n"
-            embed.add_field(name=header,value=body,inline =False)
-        await ctx.send(embed=embed)
+        try:
+            for i in data:
+                header = "{} [{}]".format(i["meta"]["app-shortdef"]["hw"],i["meta"]["app-shortdef"]["fl"])
+                body=""
+                for k in i["meta"]["app-shortdef"]["def"]:
+                    q="*".join(k.split("{it}"))
+                    q="*".join(q.split("{/it}"))
+                    q="**".join(q.split("{b}"))
+                    q="**".join(q.split("{b/}"))
+                    q="_ _\n•".join(q.split("{bc}"))
+                    q="\"".join(q.split("{ldquo}"))
+                    q="\"".join(q.split("{rdquo}"))
+                    body+=q+"\n"
+                embed.add_field(name=header,value=body,inline =False)
+            await ctx.send(embed=embed)
+        except TypeError as e:
+            embed.add_field(name="No definitions found. Maybe try one of these words?",value="•"+"\n•".join(data))
+            await ctx.send(embed=embed)
 
 cogs=[MerriamWebster]
