@@ -34,7 +34,7 @@ class MerriamWebster(commands.Cog):
             header = "{} [{}]".format(i["meta"]["app-shortdef"]["hw"],i["meta"]["app-shortdef"]["fl"])
             body=""
             for k in i["meta"]["app-shortdef"]["def"]:
-                q="*".join(q.split("{it}"))
+                q="*".join(k.split("{it}"))
                 q="*".join(q.split("{/it}"))
                 q="**".join(q.split("{b}"))
                 q="**".join(q.split("{b/}"))
