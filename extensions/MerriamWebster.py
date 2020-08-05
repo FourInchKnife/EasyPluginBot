@@ -11,8 +11,7 @@ config.json file in the following format:
     "ext":{
         "MerriamWebster":{
             "MerriamWebster":{
-                "learner":"learner key here",
-                "dictionary":"dictionary key here"
+                "learner":"learner key here"
             }
         }
     }
@@ -26,6 +25,8 @@ class MerriamWebster(commands.Cog):
     def __init__(self,bot,config):
         self.bot = bot
         self.key=config["learner"]
+        if not self.key:
+            self.key = input("Key for Merriam-Webster Learner's dictionary:")
     @commands.command()
     async def define(self,ctx,word):
         data = json.loads(re.get("https://www.dictionaryapi.com/api/v3/references/learners/json/{}?key={}".format(word,self.key))._content)
