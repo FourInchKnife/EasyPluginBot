@@ -47,5 +47,8 @@ class MerriamWebster(commands.Cog):
         except TypeError as e:
             embed.add_field(name="No definitions found. Maybe try one of these words?",value="•"+"\n•".join(data))
             await ctx.send(embed=embed)
+        except Exception as e:
+            embed.add_field(name="No definitions found. Maybe try one of these words?",value="•"+"\n•".join(data))
+            await ctx.send(embed=embed)
 
 cogs=[MerriamWebster]
