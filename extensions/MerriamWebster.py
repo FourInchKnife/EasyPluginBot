@@ -38,7 +38,7 @@ class MerriamWebster(commands.Cog):
                     body=""
                     for k in i["meta"]["app-shortdef"]["def"]:
                         q=k
-                        formatting={"{it}":"*","{/it}":"*","{b}":"**","{b/}":"**","{bc}":"_ _\n•","{ldquo}":"“","{rdquo}":"”"}
+                        formatting={"{it}":"*","{/it}":"*","{b}":"**","{/b}":"**","{bc}":"_ _\n•","{ldquo}":"“","{rdquo}":"”"}
                         for i in formatting:
                             q = q.replace(i, formatting[i])
                         body+=q+"\n"
