@@ -37,13 +37,10 @@ class MerriamWebster(commands.Cog):
                     header = "{} [{}]".format(i["meta"]["app-shortdef"]["hw"],i["meta"]["app-shortdef"]["fl"])
                     body=""
                     for k in i["meta"]["app-shortdef"]["def"]:
-                        q="*".join(k.split("{it}"))
-                        q="*".join(q.split("{/it}"))
-                        q="**".join(q.split("{b}"))
-                        q="**".join(q.split("{b/}"))
-                        q="_ _\n•".join(q.split("{bc}"))
-                        q="“".join(q.split("{ldquo}"))
-                        q="”".join(q.split("{rdquo}"))
+                        q=k
+                        formatting={"{it}":"*","{/it}":"*","{b}":"**","{b/}":"**","{bc}":"_ _\n•","{ldquo}":"“","{rdquo}":"”"}
+                        for i in formatting:
+                            q = q.replace(i, formatting[i])
                         body+=q+"\n"
                     embed.add_field(name=header,value=body,inline =False)
             await ctx.send(embed=embed)
