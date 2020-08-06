@@ -21,7 +21,6 @@ You can get your keys by making an account at https://dictionaryapi.com/
 '''
 
 class MerriamWebster(commands.Cog):
-    '''In dev now...'''
     def __init__(self,bot,config):
         self.bot = bot
         self.key=config["learner"]
@@ -48,6 +47,6 @@ class MerriamWebster(commands.Cog):
             embed.add_field(name="No definitions found. Maybe try one of these words?",value="•"+"\n•".join(data))
             await ctx.send(embed=embed)
         except Exception as e:
-            await ctx.send("So that threy an error: ```{}```Here's all the data I got: ```{}```".format(e,data))
+            print("So that threy an error: ```{}```Here's all the data I got: ```{}```".format(e,data))
 
 cogs=[MerriamWebster]
