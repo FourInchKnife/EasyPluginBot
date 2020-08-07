@@ -9,12 +9,6 @@
     "bot_token":null
   },
   "ext":{
-    "Echo":{
-      "Echo":null
-    },
-    "ScheduleMan":{
-      "ScheduleMan":null
-    },
     "MerriamWebster":{
       "MerriamWebster":{
         "learner":null
