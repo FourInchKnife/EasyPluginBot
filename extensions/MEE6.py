@@ -15,6 +15,7 @@ class Moderation(commands.Cog):
         self.bot=bot
     @commands.command()
     async def kick(self, ctx, person: discord.Member, *, reason = ""):
+        """Kicks a member form the server"""
         if not ctx.author.guild_permissions.kick_members:
             return await ctx.send("No.")
         try:
@@ -26,6 +27,7 @@ class Moderation(commands.Cog):
             await ctx.send("Failed to kick {}. Try making sure that I have the `kick members` permission, or move my role to the top of the list.".format(person.mention),allowed_mentions=discord.AllowedMentions(users=False))
     @commands.command()
     async def ban(self, ctx, person: discord.Member, *, reason = ""):
+        """Bans a member from the server"""
         if not ctx.author.guild_permissions.ban_members:
             return await ctx.send("No.")
         try:
