@@ -28,6 +28,7 @@ class MerriamWebster(commands.Cog):
             self.key = input("Key for Merriam-Webster Learner's dictionary:")
     @commands.command()
     async def define(self,ctx,word):
+        '''Uses Meriam-Webster\'s API to return a definition for a given word'''
         data = json.loads(re.get("https://www.dictionaryapi.com/api/v3/references/learners/json/{}?key={}".format(word,self.key))._content)
         embed=discord.Embed(title="Definition of {}".format(word))
         try:

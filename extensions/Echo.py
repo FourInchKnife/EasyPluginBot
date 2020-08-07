@@ -11,7 +11,7 @@ class Echo(commands.Cog):
     #adds a command
     @commands.command()
     async def echo(self,ctx,*,message):
-        """Replies with the message you send"""
+        """Echoes back whatever you say"""
         await ctx.send(message)
 #tells EasyPluginBot that the cog Echo exists
 cogs=[Echo]

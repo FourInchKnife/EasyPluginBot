@@ -11,7 +11,7 @@ class Joker(commands.Cog):
         self.usedjokes=[]
     @commands.command()
     async def joke(self,ctx):
-        """Tells a funny joke"""
+        """Tells a HORRIBLE joke"""
         joke=random.choice(self.jokes)
         self.jokes.remove(joke)
         self.usedjokes.append(joke)

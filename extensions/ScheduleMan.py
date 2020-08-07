@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 def makeIndicator(letter): ## Python magic
+	'''Generates the correct regional indicator emoji for a letter'''
 	lets="abcdefghijklmnopqrstuvwxyz"
 	maked=eval('''"\\U000'''+hex(lets.index(letter)+127462)[2:]+'''"''')
 	return maked
@@ -28,7 +29,7 @@ class ScheduleMan(commands.Cog):
 		await ctx.message.delete()
 	@commands.command()
 	async def days(self,ctx,*,arg):
-		"""Polls what days people can do something, whatever that may be"""
+		"""Asks what days people can do something"""
 		with ctx.channel.typing():
 			allButAuthor=[]
 			for i in ctx.guild.members:
