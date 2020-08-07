@@ -25,10 +25,13 @@ for i in os.listdir(directory): #searches the extension dir
             file=importlib.import_module(directory+"."+i[:-3]) #imports it if it ends in .py
             try:
                 for k in file.cogs:
-                    bot.add_cog(k(bot,config["ext"][i[:-3]][k.__name__])) #adds all of the files cogs from the cogs variable # Allow cogs to have config, without opening files multiple times
-                    print("| Found ",k)
+                    try:
+                        bot.add_cog(k(bot,config["ext"][i[:-3]][k.__name__])) #adds all of the files cogs from the cogs variable # Allow cogs to have config, without opening files multiple times
+                    except KeyError:
+                        bot.add_cog(k(bot))
+                        print("| Found ",k)
             except NameError:
-                print('Improper extension file, missing "cogs" variable. Ignoring and skipping file.')
+                    print('Improper extension file, missing "cogs" variable. Ignoring and skipping file.')
         except Exception as e:
             print("Exception: {} in {}. Ignoring and skipping file.".format(e,file))
 if bot.cogs == {}:
