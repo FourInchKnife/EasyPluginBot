@@ -7,6 +7,7 @@ class Joker(commands.Cog):
     def __init__(self,bot,config,key):
         self.bot=bot
         self.jokes=config["jokelist"]
+        self.comparisons=config["comparisons"]
         self.usedjokes=[]
     @commands.command()
     async def joke(self,ctx):
@@ -22,7 +23,7 @@ class Joker(commands.Cog):
     async def compare(self,ctx,first,second):
         """Compares any two values"""
         comparisons=["is better than","is worse than","is just as good as","is horrible compared to","is amazing compared to","is not significantly more important than"]
-        await ctx.send(first+" "+random.choice(comparisons)+" "+second,allowed_mentions=discord.AllowedMentions(users=False,roles=False,everyone=False))
+        await ctx.send(first+" "+random.choice(self.comparisons)+" "+second,allowed_mentions=discord.AllowedMentions(everyone=False,roles=False,users=False))
     @commands.command()
     async def slap(self,ctx,people: commands.Greedy[discord.Member],*,reason="a good reason!"):
         if len(people)==1:
