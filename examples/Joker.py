@@ -22,7 +22,7 @@ class Joker(commands.Cog):
     @commands.command()
     async def compare(self,ctx,first,second):
         """Compares any two values"""
-        await ctx.send(first+" "+random.choice(self.comparisons)+" "+second)
+        await ctx.send(first+" "+random.choice(self.comparisons)+" "+second,allowed_mentions=discord.AllowedMentions(everyone=False,roles=False,users=False))
     @commands.command()
     async def slap(self,ctx,people: commands.Greedy[discord.Member],*,reason="a good reason!"):
         if len(people)==1:
