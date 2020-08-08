@@ -15,6 +15,12 @@
     },
     "MEE6":{
       "Moderation":{
+        "website":{
+          "host":"localhost",
+          "port":8080,
+          "uristerilizerconfig":{"relativepaths":true,"noparentdir":true,"primeforwebsend":true},
+          "websendconfig":{"404":["inline","Hello, World!"],"sitedir":"pages"}
+        },
         "website_dir":"site"
       }
     },

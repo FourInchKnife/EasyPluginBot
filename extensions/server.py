@@ -6,10 +6,10 @@ from serverutils import IncrediblySimpleWebSend
 cogs=[] ## No cogs here.
 
 class TheBotServer(TCPServer):
-    def httprecv(self,incoming): ## Here we can listen in on http messages, and be very very good at being very very good at things.
+    def httprecieve(self,incoming): ## Here we can listen in on http messages, and be very very good at being very very good at things.
         print(incoming.rqstdt)
 
-def run(host,port,uristerilizerconfig,websendconfig):
+def run(host,port,uristerilizerconfig=None,websendconfig=None):
     server=TheBotServer(host,port,blocking=True)
     print("Made a server")
     http=Protocol_HTTP()
