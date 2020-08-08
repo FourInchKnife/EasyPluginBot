@@ -5,14 +5,16 @@
     "ext_dir":"extensions",
     "owner_ids":[
       1
-    ],
-    "bot_token":null
+    ]
   },
   "ext":{
     "MerriamWebster":{
       "MerriamWebster":{
-        "learner":null
+        "learner":"4c5a103b-53aa-4459-a276-c90b692f7633"
       }
+    },
+    "Mee6":{
+
     },
     "Joker":{
       "Joker":{
@@ -24,7 +26,7 @@
           "Why would a chicken cross a road? Because a butterfly flapped its wings in Tokyo!",
           "Why would Stephen Hawking cross the road? Because his wheelchair needed maintenance!",
           "If you think your smart, then your dumb - unless your a programmer",
-          "Why did the compiler cross the road and jump the ravine and fight the army of hungry wolves? To report a syntax error!",
+          "Why did the compiler cross the road, jump the ravine, and fight the pack of hungry wolves? To report a syntax error!",
           "Why did the programmer jump up and down? Because his computer was under him!",
           "Why did the linux user shoot his computer with a Kalashnikov? Because it was running Windows!",
           "Why should you never buy a car made by Apple? Because it wouldn't have Windows!"
