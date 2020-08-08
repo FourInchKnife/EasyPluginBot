@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 from time import sleep
 import json
+import traceback
 
 with open("config.json","r") as file:
     config = json.loads(file.read())
@@ -21,7 +22,7 @@ To configure the bot edit these lines in config.json
     "bot_token":null
   }
 }
-''''
+''' ## There was an extra single quote here
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(config["bot"]["command_prefix"]),owner_ids=set(config["bot"]["owner_ids"])) #initializes the bot
 
@@ -42,6 +43,7 @@ for i in os.listdir(config["bot"]["ext_dir"]): #searches the extension dir
                     print('Improper extension file, missing "cogs" variable. Ignoring and skipping file.')
         except Exception as e:
             print("Exception: {} in {}. Ignoring and skipping file.".format(e,file))
+            traceback.print_exc()
 if bot.cogs == {}:
     print("No working extensions found.")
     if config["bot"]["no_ext_abort"]:

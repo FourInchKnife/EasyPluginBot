@@ -3,7 +3,9 @@ The goal of this extension is to be a MEE6 clone with all of the non voice compo
 '''
 import discord
 from discord.ext import commands
-import flask
+import importlib
+import os
+import threading
 
 def makeIndicator(letter): ## Python magic
 	'''Generates the correct regional indicator emoji for a letter'''
@@ -14,6 +16,10 @@ def makeIndicator(letter): ## Python magic
 class Moderation(commands.Cog):
     def __init__(self, bot, config=None):
         self.bot=bot
+        self.config=config
+        serverfile=importlib.import_module("serverutils")
+        t=threading.Thread(target=serverfile.run)
+        t.start()
     @commands.command()
     async def kick(self, ctx, person: discord.Member, *, reason = ""):
         """Kicks a member form the server"""
