@@ -25,7 +25,10 @@ class Joker(commands.Cog):
         await ctx.send(first+" "+random.choice(self.comparisons)+" "+second,allowed_mentions=discord.AllowedMentions(everyone=False,roles=False,users=False))
     @commands.command()
     async def slap(self,ctx,people: commands.Greedy[discord.Member],*,reason="a good reason!"):
-        if len(people)==1:
+        if ctx.guild.me in people:
+            await ctx.send("Slapped {} for trying to get me to slap myself!".format(ctx.author.mention),allowed_mentions=discord.AllowedMentions(users=False))
+            return
+        elif len(people)==1:
             slapstr=people[0].mention
         elif len(people)==2:
             slapstr=people[0].mention+" and "+people[1].mention
@@ -36,7 +39,7 @@ class Joker(commands.Cog):
                     slapstr+=i.mention+", "
                 else:
                     slapstr+="and "+i.mention
-        await ctx.send("Slapped {} for {}".format(slapstr,reason),allowed_mentions=discord.AllowedMentions(everyone=False,users=False,roles=False))
+        await ctx.send("Slapped {0} for {1}".format(slapstr,reason),allowed_mentions=discord.AllowedMentions(everyone=False,users=False,roles=False))
         try:
             await ctx.message.delete()
         except:

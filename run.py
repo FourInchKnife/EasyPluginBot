@@ -7,12 +7,15 @@ import json
 
 with open("config.json","r") as file:
     config = json.loads(file.read())
-with open("keys.json","r") as file:
-    try:
+try:
+    with open("keys.json","r") as file:
         keys = json.loads(file.read())
-    except Exception as e:
-        print("Either key.json doesn't exist or it is invalid: {}".format(e))
-        keys = {}
+except FileNotFoundError as e:
+    print("key.json doesn't exist: {}".format(e))
+    keys = {}
+except Exception as e:
+    print("key.json is invalid: {}".format(e))
+    keys = {}
 '''
 To configure the bot edit these lines in "config.json"
 {
@@ -62,11 +65,11 @@ if bot.cogs == {}:
 @bot.event #prints the name of the bot user
 async def on_connect():
     print("Logged in as {0}".format(bot.user))
-
+'''
 @bot.event #command error handling
 async def on_command_error(ctx,err):
     if type(err)!=commands.errors.CommandNotFound:
-        await ctx.send(err)
+        await ctx.send(err)'''
 
 if keys["bot"]:
     bot_token=keys["bot"]
