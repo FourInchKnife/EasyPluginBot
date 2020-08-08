@@ -11,6 +11,6 @@ class Echo(commands.Cog):
     @commands.command()
     async def echo(self,ctx,*,message):
         """Echoes back whatever you say"""
-        await ctx.send(message)
+        await ctx.send(message,discord.AllowedMentions(everyone=False,roles=False))
 #tells EasyPluginBot that the cog Echo exists
 cogs=[Echo]
