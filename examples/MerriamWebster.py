@@ -7,14 +7,12 @@ from io import BytesIO
 '''
 This extensions uses the Merriam-Webster dictionary api.
 To actually use this you need to place your api keys in the
-config.json file in the following format:
+keys.json file in the following format:
 
 {
     "ext":{
         "MerriamWebster":{
-            "MerriamWebster":{
-                "learner":"learner key here"
-            }
+            "MerriamWebster":"learner key here"
         }
     }
 }
