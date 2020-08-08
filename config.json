@@ -17,7 +17,7 @@
       "Moderation":{
         "website":{
           "host":"localhost",
-          "port":8080,
+          "port":[8080,8070,8060],
           "uristerilizerconfig":{"relativepaths":true,"noparentdir":true,"primeforwebsend":true},
           "websendconfig":{"404":["inline","Hello, World!"],"sitedir":"pages"}
         },

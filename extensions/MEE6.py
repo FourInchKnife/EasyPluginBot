@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 import importlib
 import os
-import threading
+import multiprocessing
 
 def makeIndicator(letter): ## Python magic
 	'''Generates the correct regional indicator emoji for a letter'''
@@ -19,11 +19,11 @@ class Moderation(commands.Cog):
 		self.config=config
 		self.fullconfig=fullconfig
 		serverfile=importlib.import_module(fullconfig["bot"]["ext_dir"]+".server") ## As the MEE6.py is like a package, this is a package import.
-		t=threading.Thread(target=serverfile.run,args=(config["website"]["host"],config["website"]["port"],config["website"]["uristerilizerconfig"],config["website"]["websendconfig"]))
-		t.start()
+		p=multiprocessing.Process(target=serverfile.run,args=(config["website"]["host"],config["website"]["port"],config["website"]["uristerilizerconfig"],config["website"]["websendconfig"]))
+		p.start()
 	@commands.command()
 	async def kick(self, ctx, person: discord.Member, *, reason = ""):
-		"""Kicks a member form the server"""
+		"""Kicks a member from the server"""
 		if not ctx.author.guild_permissions.kick_members:
 			return await ctx.send("No.")
 		try:

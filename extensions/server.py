@@ -10,22 +10,21 @@ class TheBotServer(TCPServer):
         print(incoming.rqstdt)
 
 def run(host,port,uristerilizerconfig=None,websendconfig=None):
-    server=TheBotServer(host,port,blocking=True)
-    print("Made a server")
+    server=None
+    position=0
+    while True:
+        try:
+            server=TheBotServer(host,port[position],blocking=False) ## Blocking only works in VERY specific use cases, ie, ones in which you want to make any other coders on the team lose several hours of sleep over this weird issue that keeps happening :)
+            break
+        except OSError:
+            position+=1
+    print("Server exists on port:",port[position])
     http=Protocol_HTTP()
-    print("Made an http")
     server.addProtocol(http)
-    print("Added an http")
     uristerilizer=URISterilizer(config=uristerilizerconfig)
-    print("Made a uristerilizer")
     websend=IncrediblySimpleWebSend(config=websendconfig)
-    print("Made a websend")
     server.addExtension(uristerilizer) ## Because of "hooks", this must be first. Consult Tyler Clarke (LinuxRocks2000, some may know him on Discord as weird_pusheen) for more information.
-    print("Added the uristerilizer")
     server.addExtension(websend) ## Websender.
-    print("Added the websender")
     server.start() ## Prime the server for run.
-    print("Primed server")
     while 1:
         server.iterate()
-        print("Iterated server once")
