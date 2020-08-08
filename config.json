@@ -2,7 +2,7 @@
   "bot":{
     "no_ext_abort" : true,
     "command_prefix":"!",
-    "ext_dir":"extensions",
+    "ext_dir":"examples",
     "owner_ids":[1]
   },
   "ext":{
