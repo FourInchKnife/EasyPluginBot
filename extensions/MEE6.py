@@ -3,6 +3,7 @@ The goal of this extension is to be a MEE6 clone with all of the non voice compo
 '''
 import discord
 from discord.ext import commands
+import flask
 
 def makeIndicator(letter): ## Python magic
 	'''Generates the correct regional indicator emoji for a letter'''
