@@ -22,7 +22,8 @@ class Joker(commands.Cog):
     @commands.command()
     async def compare(self,ctx,first,second):
         """Compares any two values"""
-        await ctx.send(first+" is better than "+second)
+        comparisons=["is better than","is worse than","is just as good as","is horrible compared to","is amazing compared to","is not significantly more important than"]
+        await ctx.send(first+" "+random.choice(comparisons)+" "+second)
     @commands.command()
     async def slap(self,ctx,people: commands.Greedy[discord.Member],*,reason="a good reason!"):
         if len(people)==1:
