@@ -8,21 +8,26 @@ import traceback
 
 with open("config.json","r") as file:
     config = json.loads(file.read())
-
-''''
-To configure the bot edit these lines in config.json
+with open("keys.json","r") as file:
+    try:
+        keys = json.loads(file.read())
+    except Exception as e:
+        print("Either key.json doesn't exist or it is invalid: {}".format(e))
+        keys = {}
+'''
+To configure the bot edit these lines in "config.json"
 {
   "bot":{
     "no_ext_abort" : true,
     "command_prefix":"!",
     "ext_dir":"extensions",
-    "owner_ids":[
-      1
-    ],
-    "bot_token":null
+    "owner_ids":[1]
   }
 }
-''' ## There was an extra single quote here
+
+To add keys / to extensions (or the bot) put them in "keys.json"
+An example of this can be found in "example keys.json"
+'''
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(config["bot"]["command_prefix"]),owner_ids=set(config["bot"]["owner_ids"])) #initializes the bot
 
@@ -35,10 +40,15 @@ for i in os.listdir(config["bot"]["ext_dir"]): #searches the extension dir
             try:
                 for k in file.cogs:
                     try:
-                        bot.add_cog(k(bot,config["ext"][i[:-3]][k.__name__])) #adds all of the files cogs from the cogs variable # Allow cogs to have config, without opening files multiple times
+                        tempkey=keys["ext"][i[:-3]][k.__name__]
                     except KeyError:
-                        bot.add_cog(k(bot))
-                        print("| Found ",k)
+                        tempkey=None
+                    try:
+                        tempconfig=config["ext"][i[:-3]][k.__name__]
+                    except KeyError:
+                        tempconfig=None
+                    bot.add_cog(k(bot,tempconfig,tempkey)) #adds all of the files cogs from the cogs variable # Allow cogs to have config, without opening files multiple times
+                    print("| Found ",k)
             except NameError:
                     print('Improper extension file, missing "cogs" variable. Ignoring and skipping file.')
         except Exception as e:
@@ -60,8 +70,8 @@ async def on_command_error(ctx,err):
     if type(err)!=commands.errors.CommandNotFound:
         await ctx.send(err)
 
-if config["bot"]["bot_token"]:
-    bot_token=config["bot"]["bot_token"]
+if keys["bot"]:
+    bot_token=keys["bot"]
 else:
     bot_token=input('What is your bot token?')
 
