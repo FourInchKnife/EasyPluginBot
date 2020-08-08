@@ -7,9 +7,8 @@ def makeIndicator(letter): ## Python magic
 	maked=eval('''"\\U000'''+hex(lets.index(letter)+127462)[2:]+'''"''')
 	return maked
 class ScheduleMan(commands.Cog):
-	def __init__(self,bot,config=None):
+	def __init__(self,bot,config,key):
 		self.bot=bot
-		self.config=config ## Config!
 	@commands.command()
 	async def poll(self,ctx,*,arg):
 		"""Starts a yes/no poll"""

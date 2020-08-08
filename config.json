@@ -3,17 +3,9 @@
     "no_ext_abort" : true,
     "command_prefix":"!",
     "ext_dir":"extensions",
-    "owner_ids":[
-      1
-    ],
-    "bot_token":null
+    "owner_ids":[1]
   },
   "ext":{
-    "MerriamWebster":{
-      "MerriamWebster":{
-        "learner":null
-      }
-    },
     "Joker":{
       "Joker":{
         "jokelist":[

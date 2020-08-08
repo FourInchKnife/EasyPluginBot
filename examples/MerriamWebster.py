@@ -21,9 +21,9 @@ You can get your keys by making an account at https://dictionaryapi.com/
 '''
 
 class MerriamWebster(commands.Cog):
-    def __init__(self,bot,config):
-        self.bot = bot
-        self.key=config["learner"]
+    def __init__(self,bot,config,key):
+        self.bot=bot
+        self.key=key
         if not self.key:
             self.key = input("Key for Merriam-Webster Learner's dictionary:")
     @commands.command()

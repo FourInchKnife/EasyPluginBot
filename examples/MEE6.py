@@ -11,7 +11,7 @@ def makeIndicator(letter): ## Python magic
 	return maked
 
 class Moderation(commands.Cog):
-    def __init__(self, bot, config=None):
+    def __init__(self, bot, config,key):
         self.bot=bot
     @commands.command()
     async def kick(self, ctx, person: discord.Member, *, reason = ""):

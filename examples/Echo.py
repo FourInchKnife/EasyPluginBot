@@ -5,7 +5,7 @@ import discord
 #makes a cog where all of the commands and listeners will go
 class Echo(commands.Cog):
     #defines bot to make it easier to write
-    def __init__(self,bot,config=None):
+    def __init__(self,bot,config,key):
          self.bot = bot
     #adds a command
     @commands.command()
