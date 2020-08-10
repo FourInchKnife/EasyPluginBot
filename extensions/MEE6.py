@@ -18,7 +18,7 @@ class Moderation(commands.Cog):
 		self.bot=bot
 		self.config=config
 		self.fullconfig=fullconfig
-		serverfile=imp.load_source("server",fullconfig["bot"]["ext_dir"]+"/server.py") ## As the MEE6.py is like a package, this is a package import.
+		serverfile=imp.load_source("server",fullconfig["bot"]["ext_dir"]+"/server.py")
 		p=multiprocessing.Process(target=serverfile.run,args=(config["website"]["host"],config["website"]["port"],config["website"]["uristerilizerconfig"],config["website"]["websendconfig"]))
 		p.start()
 	@commands.command()
