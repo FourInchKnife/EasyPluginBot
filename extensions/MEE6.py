@@ -3,7 +3,7 @@ The goal of this extension is to be a MEE6 clone with all of the non voice compo
 '''
 import discord
 from discord.ext import commands
-import importlib
+import imp
 import os
 import multiprocessing
 
@@ -18,7 +18,7 @@ class Moderation(commands.Cog):
 		self.bot=bot
 		self.config=config
 		self.fullconfig=fullconfig
-		serverfile=importlib.import_module(fullconfig["bot"]["ext_dir"]+".server") ## As the MEE6.py is like a package, this is a package import.
+		serverfile=imp.load_source("server",fullconfig["bot"]["ext_dir"]+"/server.py") ## As the MEE6.py is like a package, this is a package import.
 		p=multiprocessing.Process(target=serverfile.run,args=(config["website"]["host"],config["website"]["port"],config["website"]["uristerilizerconfig"],config["website"]["websendconfig"]))
 		p.start()
 	@commands.command()

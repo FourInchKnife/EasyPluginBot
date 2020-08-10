@@ -1,0 +1,21 @@
+def handleget(incoming,server):
+    return (200,'''<!DOCTYPE html>
+<html>
+    <head>
+        <title>SetName</title>
+    </head>
+    <body>
+        Your name: <input id="minput"></input><button onclick="input()">Submit!</button>
+        <script type="text/javascript">
+            function input(){
+                xml=new XMLHttpRequest();
+                xml.open("POST",'auth',true);
+                xml.send(document.getElementById("minput").value)
+            }
+        </script>
+    </body>
+</html>
+    ''')
+def handlepost(incoming,server):
+    server.authed=incoming.rqstdt["payload"].decode()
+    return (200,"")
