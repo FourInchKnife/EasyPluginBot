@@ -45,9 +45,10 @@ for i in os.listdir(config["bot"]["ext_dir"]): #searches the extension dir
                         tempkey=None
                     try:
                         tempconfig=config["ext"][i[:-3]][k.__name__]
-                    except KeyError:
-                        tempconfig=None
-                    bot.add_cog(k(bot,tempconfig,tempkey,config)) #adds all of the files cogs from the cogs variable # Allow cogs to have config, without opening files multiple times
+                        tempconfig["ext_dir"]=config["bot"]["ext_dir"]
+                    except (KeyError, TypeError):
+                        tempconfig={"ext_dir":config["bot"]["ext_dir"]}
+                    bot.add_cog(k(bot,tempconfig,tempkey)) #adds all of the files cogs from the cogs variable # Allow cogs to have config, without opening files multiple times
                     print("| Found ",k)
             except NameError:
                     print('Improper extension file, missing "cogs" variable. Ignoring and skipping file.')

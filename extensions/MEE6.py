@@ -14,13 +14,9 @@ def makeIndicator(letter): ## Python magic
 	return maked
 
 class Moderation(commands.Cog):
-	def __init__(self, bot, config=None,keys=None,fullconfig=None):
+	def __init__(self, bot, config=None,keys=None):
 		self.bot=bot
 		self.config=config
-		self.fullconfig=fullconfig
-		serverfile=imp.load_source("server",fullconfig["bot"]["ext_dir"]+"/server.py")
-		p=multiprocessing.Process(target=serverfile.run,args=(config["website"]["host"],config["website"]["port"],config["website"]["uristerilizerconfig"],config["website"]["websendconfig"]))
-		p.start()
 	@commands.command()
 	async def kick(self, ctx, person: discord.Member, *, reason = ""):
 		"""Kicks a member from the server"""
@@ -45,5 +41,9 @@ class Moderation(commands.Cog):
 				await sent_message.add_reaction(makeIndicator(i))
 		except discord.HTTPException:
 			await ctx.send("Failed to ban {}. Try making sure that I have the `ban members` permission, or move my role to the top of the list.".format(person.mention),allowed_mentions=discord.AllowedMentions(users=False))
-
-cogs = [Moderation]
+class Website(commands.Cog):
+	def __init__(self,bot,config,keys=None):
+		serverfile=imp.load_source("server",config["ext_dir"]+"/server.py")
+		p=multiprocessing.Process(target=serverfile.run,args=(config["host"],config["port"],config["uristerilizerconfig"],config["websendconfig"]))
+		p.start()
+cogs = [Moderation,Website]

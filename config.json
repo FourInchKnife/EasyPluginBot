@@ -14,13 +14,12 @@
       }
     },
     "MEE6":{
-      "Moderation":{
-        "website":{
-          "host":"localhost",
-          "port":[8080,8070,8060],
-          "uristerilizerconfig":{},
-          "websendconfig":{"sitedir":"pages"}
-        },
+      "Moderation":null,
+      "Website":{
+        "host":"localhost",
+        "port":[8080,8070,8060],
+        "uristerilizerconfig":{},
+        "websendconfig":{"sitedir":"pages"},
         "website_dir":"site"
       }
     },
