@@ -23,7 +23,7 @@ def run(host,port,uristerilizerconfig=None,websendconfig=None):
             break
         except OSError:
             position+=1
-    print("Server exists on port:",port[position])
+    print("| • Server exists on port:",port[position])
     http=Protocol_HTTP()
     server.addProtocol(http)
     uristerilizer=URISterilizer(config=uristerilizerconfig)

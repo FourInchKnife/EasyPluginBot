@@ -16,7 +16,6 @@ def makeIndicator(letter): ## Python magic
 class Moderation(commands.Cog):
 	def __init__(self, bot, config=None,keys=None):
 		self.bot=bot
-		self.config=config
 	@commands.command()
 	async def kick(self, ctx, person: discord.Member, *, reason = ""):
 		"""Kicks a member from the server"""
@@ -43,7 +42,11 @@ class Moderation(commands.Cog):
 			await ctx.send("Failed to ban {}. Try making sure that I have the `ban members` permission, or move my role to the top of the list.".format(person.mention),allowed_mentions=discord.AllowedMentions(users=False))
 class Website(commands.Cog):
 	def __init__(self,bot,config,keys=None):
-		serverfile=imp.load_source("server",config["ext_dir"]+"/server.py")
+		self.config=config
+		serverfile=imp.load_source("server",config["bot"]["ext_dir"]+"/server.py")
 		p=multiprocessing.Process(target=serverfile.run,args=(config["host"],config["port"],config["uristerilizerconfig"],config["websendconfig"]))
 		p.start()
+	@commands.command()
+	async def webstatus(self,ctx):
+		pass
 cogs = [Moderation,Website]
