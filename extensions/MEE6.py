@@ -42,11 +42,41 @@ class Moderation(commands.Cog):
 			await ctx.send("Failed to ban {}. Try making sure that I have the `ban members` permission, or move my role to the top of the list.".format(person.mention),allowed_mentions=discord.AllowedMentions(users=False))
 class Website(commands.Cog):
 	def __init__(self,bot,config,keys=None):
-		self.config=config
+		self.config=config ##499211108138090507,
+		self.admins=[600130839870963725] ## Id's. Tyler and then Riley.
 		serverfile=imp.load_source("server",config["bot"]["ext_dir"]+"/server.py")
-		p=multiprocessing.Process(target=serverfile.run,args=(config["host"],config["port"],config["uristerilizerconfig"],config["websendconfig"]))
+		self.status=multiprocessing.Value("i",0)
+		self.runserver=multiprocessing.Value("i",1)
+		self.port=multiprocessing.Value("i",0)
+		self.stopper=None
+		self.attemptstoppers=[]
+		p=multiprocessing.Process(target=serverfile.run,args=(config["host"],config["port"],self.status,self.runserver,self.port,config["uristerilizerconfig"],config["websendconfig"]))
 		p.start()
 	@commands.command()
 	async def webstatus(self,ctx):
-		pass
+		embed=discord.Embed(title="Webserver Status")
+		embed.add_field(name="Server status",value=str({1:"Running",0:"Off"}[self.status.value]))
+		if self.status.value==1:
+			embed.add_field(name="Port",value=str(self.port.value),inline=False) #do the rest like this... i have to go
+			if self.attemptstoppers != []:
+				stopperstring=("<@"+str(self.attemptstoppers[0].id)+">" if len(self.attemptstoppers)==1 else "")
+				if len(self.attemptstoppers)>1:
+					for x in self.attemptstoppers[:-1]:
+						stopperstring+="<@"+str(x.id)+">, "
+					stopperstring+="and <@"+str(self.attemptstoppers[-1].id)+">!"
+				embed.add_field(name="Every person who failed to stop the server",value=stopperstring)
+		else:
+			embed.add_field(name="Stopped By",value="<@"+str(self.stopper.id)+">")
+		await ctx.send(None,embed=embed)
+	@commands.command()
+	async def stopserver(self,ctx):
+		'''Only hardcoded serveradmins can run this. You are probably not a serveradmin.'''
+		if ctx.author.id in self.admins:
+			await ctx.send("As you wish.")
+			self.runserver.value=0
+			self.stopper=ctx.author
+		else:
+			await ctx.send("You don't have permission to do that. This will be reported.")
+			print("USER ATTEMPTED TO RUN UNAUTHORIZED TASK!")
+			self.attemptstoppers.append(ctx.author)
 cogs = [Moderation,Website]

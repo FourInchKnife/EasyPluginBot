@@ -6,7 +6,7 @@ from serverutils import SimpleGzipper
 from serverutils import PyHP
 
 
-cogs=[] ## No cogs here.
+cogs=[]
 
 class TheBotServer(TCPServer):
     def inittasks(self):
@@ -14,7 +14,7 @@ class TheBotServer(TCPServer):
     def httprecieve(self,incoming): ## Here we can listen in on http messages, and be very very good at being very very good at things.
         print(incoming.rqstdt)
 
-def run(host,port,uristerilizerconfig=None,websendconfig=None):
+def run(host,port,serveron,run,eventualport,uristerilizerconfig=None,websendconfig=None):
     server=None
     position=0
     while True:
@@ -23,7 +23,8 @@ def run(host,port,uristerilizerconfig=None,websendconfig=None):
             break
         except OSError:
             position+=1
-    print("| • Server exists on port:",port[position])
+    print("Server exists on port:",port[position])
+    eventualport.value=port[position]
     http=Protocol_HTTP()
     server.addProtocol(http)
     uristerilizer=URISterilizer(config=uristerilizerconfig)
@@ -35,5 +36,11 @@ def run(host,port,uristerilizerconfig=None,websendconfig=None):
     server.addExtension(pyhp) ## Python pHP. (Acronym). As usual, this one requires sterilized URI's, and Gzipper messes up PyHP messages, because it tries to index them and then edits the uri - so the python reader craps up.
     server.addExtension(websend) ## Websender.
     server.start() ## Ready the server for running. Although nothing serious (I think) requires this, its still a really good idea to do this.
-    while 1:
-        server.iterate()
+    serveron.value=1
+    try:
+        while run.value:
+            server.iterate()
+    except:
+        pass
+    finally:
+        serveron.value=0
