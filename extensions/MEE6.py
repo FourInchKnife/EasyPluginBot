@@ -42,8 +42,8 @@ class Moderation(commands.Cog):
 			await ctx.send("Failed to ban {}. Try making sure that I have the `ban members` permission, or move my role to the top of the list.".format(person.mention),allowed_mentions=discord.AllowedMentions(users=False))
 class Website(commands.Cog):
 	def __init__(self,bot,config,keys=None):
-		self.config=config ##499211108138090507,
-		self.admins=[600130839870963725] ## Id's. Tyler and then Riley.
+		self.config=config
+		self.admins=config["web_admins"]
 		serverfile=imp.load_source("server",config["bot"]["ext_dir"]+"/server.py")
 		self.status=multiprocessing.Value("i",0)
 		self.runserver=multiprocessing.Value("i",1)
