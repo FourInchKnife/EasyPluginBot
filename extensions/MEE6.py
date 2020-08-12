@@ -59,14 +59,14 @@ class Website(commands.Cog):
 		if self.status.value==1:
 			embed.add_field(name="Port",value=str(self.port.value),inline=False) #do the rest like this... i have to go
 			if self.attemptstoppers != []:
-				stopperstring=("<@"+str(self.attemptstoppers[0].id)+">" if len(self.attemptstoppers)==1 else "")
+				stopperstring=(self.attemptstoppers[0].mention if len(self.attemptstoppers)==1 else "")
 				if len(self.attemptstoppers)>1:
 					for x in self.attemptstoppers[:-1]:
-						stopperstring+="<@"+str(x.id)+">, "
-					stopperstring+="and <@"+str(self.attemptstoppers[-1].id)+">!"
+						stopperstring+=x.mention+", "
+					stopperstring+="and "+self.attemptstoppers[-1].mention
 				embed.add_field(name="Every person who failed to stop the server",value=stopperstring)
 		else:
-			embed.add_field(name="Stopped By",value="<@"+str(self.stopper.id)+">")
+			embed.add_field(name="Stopped By",value=self.stopper.mention)
 		await ctx.send(None,embed=embed)
 	@commands.command()
 	async def stopserver(self,ctx):
