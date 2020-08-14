@@ -15,5 +15,6 @@ class Pain(commands.Cog):
         async with ctx.typing():
             for i in self.script:
                 await sleep(1)
-                await ctx.send(ping+" "+i)
+                message = await ctx.send(ping+" "+i)
+                await message.delete(1)
 cogs=[Pain]
