@@ -16,5 +16,5 @@ class Pain(commands.Cog):
             for i in self.script:
                 await sleep(1)
                 message = await ctx.send(ping+" "+i)
-                await message.delete(delay=5)
+                await message.delete(delay=20)
 cogs=[Pain]
