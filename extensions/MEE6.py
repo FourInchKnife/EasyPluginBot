@@ -42,8 +42,8 @@ class Moderation(commands.Cog):
 			await ctx.send("Failed to ban {}. Try making sure that I have the `ban members` permission, or move my role to the top of the list.".format(person.mention),allowed_mentions=discord.AllowedMentions(users=False))
 class Website(commands.Cog):
 	def __init__(self,bot,config,keys=None):
-		self.config=config ##499211108138090507,
-		self.admins=[600130839870963725] ## Id's. Tyler and then Riley.
+		self.config=config
+		self.admins=config["web_admins"]
 		serverfile=imp.load_source("server",config["bot"]["ext_dir"]+"/server.py")
 		self.status=multiprocessing.Value("i",0)
 		self.runserver=multiprocessing.Value("i",1)
@@ -59,14 +59,14 @@ class Website(commands.Cog):
 		if self.status.value==1:
 			embed.add_field(name="Port",value=str(self.port.value),inline=False) #do the rest like this... i have to go
 			if self.attemptstoppers != []:
-				stopperstring=("<@"+str(self.attemptstoppers[0].id)+">" if len(self.attemptstoppers)==1 else "")
+				stopperstring=(self.attemptstoppers[0].mention if len(self.attemptstoppers)==1 else "")
 				if len(self.attemptstoppers)>1:
 					for x in self.attemptstoppers[:-1]:
-						stopperstring+="<@"+str(x.id)+">, "
-					stopperstring+="and <@"+str(self.attemptstoppers[-1].id)+">!"
+						stopperstring+=x.mention+", "
+					stopperstring+="and "+self.attemptstoppers[-1].mention
 				embed.add_field(name="Every person who failed to stop the server",value=stopperstring)
 		else:
-			embed.add_field(name="Stopped By",value="<@"+str(self.stopper.id)+">")
+			embed.add_field(name="Stopped By",value=self.stopper.mention)
 		await ctx.send(None,embed=embed)
 	@commands.command()
 	async def stopserver(self,ctx):

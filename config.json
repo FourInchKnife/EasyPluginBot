@@ -20,7 +20,8 @@
         "port":[8080,8070,8060],
         "uristerilizerconfig":{},
         "websendconfig":{"sitedir":"pages"},
-        "website_dir":"site"
+        "website_dir":"site",
+        "web_admins":[499211108138090507,600130839870963725]
       }
     },
     "Joker":{
