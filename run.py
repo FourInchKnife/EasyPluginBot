@@ -62,6 +62,14 @@ if bot.cogs == {}:
         sleep(5)
         exit()
 
+@commands.command()
+async def help(ctx,cog):
+    print("The cog (in help) is",cog)
+    if cog:
+        ctx.send("Sorry, this command is temporarily not found and you would do better to not run it.")
+    else:
+        ctx.send("I would love to help you with that cog. I'm not going to, if you can't tell.")
+
 @bot.event #prints the name of the bot user
 async def on_connect():
     print("Logged in as {0}".format(bot.user))
