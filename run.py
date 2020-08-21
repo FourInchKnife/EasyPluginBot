@@ -5,17 +5,19 @@ import discord
 from discord.ext import commands
 from time import sleep
 import json
+from io import BytesIO, StringIO
+import traceback
 
-with open("config.json","r") as file:
+with open("core/config.json","r") as file:
     config = json.loads(file.read())
-with open("keys.json","r") as file:
-    try:
+try:
+    with open("core/keys.json","r") as file:
         keys = json.loads(file.read())
-    except Exception as e:
-        print("Either key.json doesn't exist or it is invalid: {}".format(e))
-        keys = {}
+except Exception as e:
+    print("Either key.json doesn't exist or it is invalid: {}".format(e))
+    keys = {}
 '''
-To configure the bot edit these lines in "config.json"
+To configure the bot edit these lines in "core/config.json"
 {
   "bot":{
     "no_ext_abort" : true,
@@ -25,11 +27,16 @@ To configure the bot edit these lines in "config.json"
   }
 }
 
-To add keys / to extensions (or the bot) put them in "keys.json"
+To add keys / to extensions (or the bot) put them in "core/keys.json"
 An example of this can be found in "example keys.json"
 '''
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(config["bot"]["command_prefix"]),owner_ids=set(config["bot"]["owner_ids"])) #initializes the bot
+
+print("Loading Core cogs...")
+file = importlib.import_module("core.core-extensions")
+for i in file.cogs:
+    bot.add_cog(i(bot,config["bot"]))
 
 print("Checking "+config["bot"]["ext_dir"]+"/ for extensions...")
 for i in os.listdir(config["bot"]["ext_dir"]): #searches the extension dir
@@ -67,7 +74,11 @@ async def on_connect():
 @bot.event #command error handling
 async def on_command_error(ctx,err):
     if type(err)!=commands.errors.CommandNotFound:
-        await ctx.send(err)
+        errTB = "\n".join(traceback.format_exception(type(err),err,err.__traceback__))
+        if len(errTB) > config["bot"]["max_error_length"]:
+            await ctx.send(err,file=discord.File(BytesIO(errTB.encode()),"traceback.txt"))
+        else:
+            await ctx.send(str(err)+"\n```{}```".format(errTB))
 
 if keys["bot"]:
     bot_token=keys["bot"]
