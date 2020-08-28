@@ -1,11 +1,13 @@
 {
   "bot":{
     "no_ext_abort" : true,
-    "command_prefix":"!",
-    "ext_dir":"examples",
-    "owner_ids":[600130839870963725,499211108138090507],
-    "github":"https://github.com/FourInchKnife/EasyPluginBot/",
-    "max_error_length":1000
+    "command_prefix" : "!",
+    "ext_dir" : "examples",
+    "owner_ids" : [600130839870963725,499211108138090507],
+    "links" : {
+      "GitHub" : "https://github.com/FourInchKnife/EasyPluginBot/"
+    },
+    "max_error_length" : 1000
   },
   "ext":{
     "Joker":{

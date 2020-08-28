@@ -31,7 +31,10 @@ class Core(commands.Cog):
 		for i in self.bot.cogs:
 			cogNames.append(i)
 		embed.add_field(name="Extension(s)",value=self.listStr(cogNames))
-		embed.add_field(name="GitHub",value=self.config["github"])
+		links=[]
+		for i in self.config["links"]:
+			links.append("[{0}]({1})".format(i, self.config["links"][i]))
+		embed.add_field(name="GitHub",value="\n".join(links))
 		await ctx.send(None,embed=embed)
 
 cogs=[Core]
