@@ -5,7 +5,8 @@
     "ext_dir" : "examples",
     "owner_ids" : [600130839870963725,499211108138090507],
     "links" : {
-      "GitHub" : "https://github.com/FourInchKnife/EasyPluginBot/"
+      "GitHub" : "https://github.com/FourInchKnife/EasyPluginBot/",
+      "Docs" : "https://fourinchknife.github.io/EasyPluginBot/"
     },
     "max_error_length" : 1000
   },
