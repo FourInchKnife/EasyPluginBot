@@ -3,15 +3,15 @@ This repo is a fairly modular, yet easy to use implementation of
 [discord.py][dpy].
 Its main purpose is to work as an extension handler.
 ### Table of Contents
-1. [Basic Setup](#setup)
-2. [Editing config.json](#config)
-3. [Adding Keys and Tokens](#keys)
-4. [Using Extensions](#ext)
-5. [Writing New Extensions](#writing)
-6. [Reporting Bugs](#bugs)
-7. [Help With Development](#dev)
+1. [Basic Setup](#basic-setup)
+2. [Editing config.json](#editing-configjson)
+3. [Adding Keys and Tokens](#adding-keys-and-tokens)
+4. [Using Extensions](#using-extensions)
+5. [Writing New Extensions](#writing-new-extensions)
+6. [Reporting Bugs](#reporting-bugs)
+7. [Help With Development](#help-with-development)
 
-#### Basic Setup {#setup}
+#### Basic Setup
 To use this framework, you need at least Python 3.6, though the
 [latest version][pydown] is recommended. <br>
 If you are on Linux, you probably don't need to install [Python][py].
@@ -26,7 +26,7 @@ Now that everything is installed, try running the bot. You can either use
 your file manager and double-click on `run.py`, or you can run it from
 the terminal.
 
-#### Editing config.json {#config}
+#### Editing config.json
 Most of what makes this framework so modular is the extension management,
 but part of that comes from the `config.json` file.
 
@@ -77,7 +77,7 @@ specific cogs. To do this, use this format:
 Each bot plugin should come with its own readme to tell you what config
 settings it needs.
 
-#### Adding Keys and Tokens {#keys}
+#### Adding Keys and Tokens
 
 Adding your Discord bot token to this program is very similar to editing
 the `config.json` file. All you have to do is create the `core/keys.json`
@@ -96,14 +96,14 @@ If you do this, the program won't ask you to input your token at every
 startup, and will instead use whatever you put into the file. All
 extensions should tell you what tokens they use.
 
-#### Using Extensions {#ext}
+#### Using Extensions
 
 Using extensions is super easy. Paste it into the extension folder
 (`extensions/` by default). That's it. When you run the bot, it will
 search through the folder and try to load all `.py` files. If any file
 fails to load, the program will ignore it and move on.
 
-#### Writing New Extensions {#writing}
+#### Writing New Extensions
 
 To write new extensions, write all code in a command in a
 [cog][dpycogs]. I'm not going to write a Python tutorial or a
@@ -113,7 +113,7 @@ if you're clueless.
 After you finish writing your extension, add the `Cogs` variable. It
 must be a list containing all of the cogs in the file.
 
-#### Reporting Bugs {#bugs}
+#### Reporting Bugs
 
 Just [open a new issue][issue] on the EasyPluginBot GitHub page. Make
 sure you include the version of Python, discord.py, and EasyPluginBot.
@@ -121,7 +121,7 @@ If you get a traceback, include that as well. If it's an issue with one
 of the example plugins, don't start an issue. The example plugins are
 not updated.
 
-#### Help With Development {#dev}
+#### Help With Development
 
 As of right now, there is no mechanism for helping out other than just
 using pull requests in GitHub.
