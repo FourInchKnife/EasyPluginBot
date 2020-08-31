@@ -48,6 +48,7 @@ folder and open `config.json`. You should see something like this:
 ```
 
 Here's a breakdown of what everything controls:<br>
+
 | Parameter Name | Description | Type |
 | :---: | :--- | :---: |
 | no_ext_abort | Toggles whether the bot runs even without any extensions loaded | `bool` |
