@@ -47,11 +47,11 @@ folder and open `config.json`. You should see something like this:
 }
 ```
 
-Here's a breakdown of what everything controls:<br>
+Here's a breakdown of what everything controls:
 
-| Parameter Name | Description | Type |
-| :---: | :--- | :---: |
-| no_ext_abort | Toggles whether the bot runs even without any extensions loaded | `bool` |
+| Parameter Name | Description | Type  |
+| :---:          | :---        | :---: |
+| no_ext_abort   | Toggles whether the bot runs even without any extensions loaded | `bool` |
 | command_prefix | The prefix used to call commands from Discord | `string` |
 | ext_dir | Selects the directory to search for extensions | `string` |
 | owner_ids | Sets the Discord ID for the owner of the bot | `List[integer]` |
