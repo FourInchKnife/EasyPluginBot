@@ -1,17 +1,43 @@
 from discord.ext import commands
 import discord
 from random import randint
+import asyncio
+import datetime
 
 class Roll(commands.Cog):
     def __init__(self,bot,config,key):
         self.bot = bot
-    def diceRoll(self,amount,type):
+    def diceRoll(self,amount,type, stopat = None):
         rolls = []
         for i in range(amount):
+            if stopat != None and datetime.datetime.now() > stopat:
+                raise TimeoutError("That would take more than 3 seconds.")
             rolls.append(randint(1,type))
         return rolls
     @commands.command()
-    async def roll(self, ctx, *, args):
+    async def roll(self,ctx, *, args):
+        await self.rollDice(ctx,args,datetime.datetime.now() + datetime.timedelta(seconds = 3))
+    async def quickSort(self,arr,stopat = None):
+        less = []
+        pivotList = []
+        more = []
+        if len(arr) <= 1:
+            return arr
+        else:
+            pivot = arr[0]
+            for i in arr:
+                if stopat != None and datetime.datetime.now() > stopat:
+                    raise TimeoutError("That would take more than 3 seconds.")
+                if i < pivot:
+                    less.append(i)
+                elif i > pivot:
+                    more.append(i)
+                else:
+                    pivotList.append(i)
+            less = self.quickSort(less)
+            more = self.quickSort(more)
+            return more + less + pivotList
+    async def rollDice(self, ctx, args, stopat):
         async with ctx.channel.typing():
             bits = args.split("!",1)
             data = bits[0]
@@ -40,12 +66,12 @@ To keep the lowest `<a>`, use `kl<a>`""")
                 if "d" in i:
                     iSplit = i.split("d")
                     if len(iSplit) > 1:
-                        rolls += self.diceRoll(iSplit[0],iSplit[1])
+                        rolls += self.diceRoll(int(iSplit[0]),int(iSplit[1]),stopat = stopat)
                     else:
-                        rolls += self.diceRoll(1,iSplit[0])
+                        rolls += self.diceRoll(1,int(iSplit[0]), stopat = stopat)
                 elif "k" in i:
                     keptRolls = rolls[:]
-                    keptRolls.sort(reverse = True)
+                    keptRolls = await self.quickSort(keptRolls,stopat)
                     if "kl" in i:
                         keptRolls = keptRolls[-int(i[2:]):]
                     else:
@@ -58,9 +84,11 @@ To keep the lowest `<a>`, use `kl<a>`""")
                 showKept = True
             embed = discord.Embed(title = "Roll Result: {}".format(str(title)),
                     description = "Command: `{}`".format(args))
-            embed.add_field(name = "Raw Rolls", value = str(rolls))
+            embed.add_field(name = "Raw Rolls", value = (str(rolls) + 1024 * "​")[:1024])
             if showKept:
-                embed.add_field(name = "Kept Rolls",value = str(keptRolls))
+                embed.add_field(name = "Kept Rolls",value = (str(keptRolls) + 1024 * "​")[:1024])
             embed.set_footer(text = "{0}#{1}".format(ctx.author.name,ctx.author.discriminator),
                     icon_url = ctx.author.avatar_url)
-            await ctx.send(None,embeds = [embed])
+        await ctx.send(None,embed = embed)
+
+cogs = [Roll]
