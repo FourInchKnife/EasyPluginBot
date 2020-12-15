@@ -1,3 +1,4 @@
+extensions/*.py
 __pycache__/
 keys.json
 .serverutils-gzipper-cache

@@ -2,7 +2,7 @@
   "bot":{
     "no_ext_abort" : true,
     "command_prefix" : "!",
-    "ext_dir" : "examples",
+    "ext_dir" : "extensions",
     "owner_ids" : [600130839870963725,499211108138090507],
     "links" : {
       "GitHub" : "https://github.com/FourInchKnife/EasyPluginBot/",
